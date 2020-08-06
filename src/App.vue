@@ -36,7 +36,6 @@ p {
   font-family: $system-font-family;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: $white;
 }
 
