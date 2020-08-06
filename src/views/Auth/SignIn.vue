@@ -1,5 +1,8 @@
 <template>
-  <div class="container">
+  <div
+    class="container"
+    :class="{ 'light-background': !isDarkMode, 'dark-background': isDarkMode }"
+  >
     <div class="request">
       Don't have a Easybuoy HQ account?
       <router-link to="/request">Request an account</router-link>
@@ -31,15 +34,12 @@ export default {
   methods: {
     toggleDarkMode() {
       this.isDarkMode = !this.isDarkMode;
-      console.log("a", this.isDarkMode);
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../../global-styles/colors";
-
 .light-background {
   background-color: $light-gray;
 }
@@ -47,6 +47,15 @@ export default {
 .dark-background {
   background-color: $dark-blue;
 }
+
+.light-text {
+  color: $white;
+}
+
+.dark-text {
+  color: $black;
+}
+
 .container {
   display: flex;
   justify-content: center;

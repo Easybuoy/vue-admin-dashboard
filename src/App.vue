@@ -5,8 +5,6 @@
 </template>
 
 <style lang="scss">
-
-
 body {
   background-color: $dark-blue;
 }
