@@ -3,19 +3,7 @@
     class="container"
     :class="{ 'light-background': !isDarkMode, 'dark-background': isDarkMode }"
   >
-    <transition
-      name="slide-in-right"
-      enter-active-class="animate__animated animate__slideInRight"
-    >
-      <div
-        class="request"
-        :class="{ 'light-request': isDarkMode, 'dark-request': !isDarkMode }"
-        v-show="show"
-      >
-        Don't have a Easybuoy HQ account?
-        <router-link to="/request">Request an account</router-link>
-      </div>
-    </transition>
+    <RequestAccount />
 
     <div class="login">
       <img src="@/assets/logo.svg" alt="logo" />
@@ -48,25 +36,21 @@
 </template>
 
 <script>
+import RequestAccount from "@/components/RequestAccount";
 export default {
   name: "SignIn",
-  data() {
-    return {
-      show: false,
-    };
-  },
   computed: {
     isDarkMode() {
       return this.$store.getters.isDarkMode;
     },
   },
-  mounted() {
-    this.show = true;
-  },
   methods: {
     toggleDarkMode() {
       this.$store.commit("toggleDarkMode");
     },
+  },
+  components: {
+    RequestAccount,
   },
 };
 </script>
@@ -173,27 +157,5 @@ a {
 
 .dark-link {
   color: rgba(0, 0, 0, 0.3);
-}
-
-.request {
-  position: absolute;
-  top: 40px;
-  right: 40px;
-}
-
-.light-request {
-  color: rgba(255, 255, 255, 0.3);
-
-  a {
-    color: $white;
-  }
-}
-
-.dark-request {
-  color: rgba(0, 0, 0, 0.3);
-
-  a {
-    color: $black;
-  }
 }
 </style>
