@@ -28,7 +28,7 @@
       >
       <transition
         appear
-        appear-active-class="animate__animated animate__flipInX"
+        appear-active-class="animate__animated animate__flipInY"
       >
         <a
           href=""
@@ -74,7 +74,7 @@
       >
       <transition
         appear
-        appear-active-class="animate__animated animate__flipInX"
+        appear-active-class="animate__animated animate__flipInY"
       >
         <a
           href=""
@@ -140,6 +140,7 @@ export default {
 
 h2 {
   @include heading-2;
+  text-align: center;
 }
 
 .cards {
