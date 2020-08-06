@@ -19,6 +19,10 @@ body {
 h1 {
   @include heading-1;
 }
+
+p {
+  @include large-text-bold;
+}
 #app {
   font-family: $system-font-family;
   -webkit-font-smoothing: antialiased;
