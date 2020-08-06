@@ -14,6 +14,8 @@
       <button>Sign In</button>
 
       <router-link to="/recover">Forgot your password? </router-link>
+
+      <button @click="toggleDarkMode()">Toggle</button>
     </div>
   </div>
 </template>
@@ -21,12 +23,30 @@
 <script>
 export default {
   name: "SignIn",
+  data: () => {
+    return {
+      isDarkMode: false,
+    };
+  },
+  methods: {
+    toggleDarkMode() {
+      this.isDarkMode = !this.isDarkMode;
+      console.log("a", this.isDarkMode);
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 @import "../../global-styles/colors";
 
+.light-background {
+  background-color: $light-gray;
+}
+
+.dark-background {
+  background-color: $dark-blue;
+}
 .container {
   display: flex;
   justify-content: center;
@@ -72,6 +92,11 @@ button {
   color: $white;
   margin-top: 20px;
   margin-bottom: 40px;
+  cursor: pointer;
+
+  &:hover {
+    background: $middle-blue;
+  }
 }
 
 a {

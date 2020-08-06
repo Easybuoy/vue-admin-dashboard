@@ -5,8 +5,7 @@
 </template>
 
 <style lang="scss">
-@import "./global-styles/colors";
-@import "./global-styles/typography";
+
 
 body {
   background-color: $dark-blue;
