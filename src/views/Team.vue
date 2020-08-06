@@ -145,7 +145,7 @@ h2 {
 .cards {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: space-evenly;
   align-items: space-evenly;
 }
 
@@ -153,7 +153,7 @@ h2 {
   height: 400px;
   width: 100%;
   max-width: 300px;
-  margin: 20px;
+  margin: 50px 20px;
   border-radius: 10px;
 }
 
