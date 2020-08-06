@@ -19,17 +19,17 @@ export default {
   name: "RequestAccount",
   data() {
     return {
-      show: false,
+      show: false
     };
   },
   computed: {
     isDarkMode() {
       return this.$store.getters.isDarkMode;
-    },
+    }
   },
   mounted() {
     this.show = true;
-  },
+  }
 };
 </script>
 

@@ -5,8 +5,8 @@ module.exports = {
         prependData: `
             @import "@/global-styles/colors";
             @import "@/global-styles/typography";
-            `,
-      },
-    },
-  },
+            `
+      }
+    }
+  }
 };

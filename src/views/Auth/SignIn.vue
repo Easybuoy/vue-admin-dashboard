@@ -30,13 +30,15 @@
         >Forgot your password?
       </router-link>
 
-      <button @click="toggleDarkMode()">Toggle</button>
+      <ThemeSwitch />
     </div>
   </div>
 </template>
 
 <script>
 import RequestAccount from "@/components/RequestAccount";
+import ThemeSwitch from "@/components/ThemeSwitch";
+
 export default {
   name: "SignIn",
   computed: {
@@ -44,13 +46,9 @@ export default {
       return this.$store.getters.isDarkMode;
     },
   },
-  methods: {
-    toggleDarkMode() {
-      this.$store.commit("toggleDarkMode");
-    },
-  },
   components: {
     RequestAccount,
+    ThemeSwitch,
   },
 };
 </script>
