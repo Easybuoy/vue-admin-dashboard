@@ -3,20 +3,37 @@
     class="container"
     :class="{ 'light-background': !isDarkMode, 'dark-background': isDarkMode }"
   >
-    <div class="request">
+    <div
+      class="request"
+      :class="{ 'light-request': isDarkMode, 'dark-request': !isDarkMode }"
+    >
       Don't have a Easybuoy HQ account?
       <router-link to="/request">Request an account</router-link>
     </div>
     <div class="login">
       <img src="@/assets/logo.svg" alt="logo" />
 
-      <h4>Sign in to Easybuoy HQ</h4>
+      <h4 :class="{ 'light-text': isDarkMode, 'dark-text': !isDarkMode }">
+        Sign in to Easybuoy HQ
+      </h4>
 
-      <input type="email" placeholder="Email" />
-      <input type="password" placeholder="Password" />
+      <input
+        type="email"
+        placeholder="Email"
+        :class="{ 'light-field': isDarkMode, 'dark-field': !isDarkMode }"
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        :class="{ 'light-field': isDarkMode, 'dark-field': !isDarkMode }"
+      />
       <button>Sign In</button>
 
-      <router-link to="/recover">Forgot your password? </router-link>
+      <router-link
+        to="/recover"
+        :class="{ 'light-link': isDarkMode, 'dark-link': !isDarkMode }"
+        >Forgot your password?
+      </router-link>
 
       <button @click="toggleDarkMode()">Toggle</button>
     </div>
@@ -54,6 +71,26 @@ export default {
 
 .dark-text {
   color: $black;
+}
+
+.light-field {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: $white;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+  }
+}
+
+.dark-field {
+  background: rgba(198, 208, 235, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: $black;
+
+  &::placeholder {
+    color: rgba(0, 0, 0, 0.3);
+  }
 }
 
 .container {
@@ -112,18 +149,36 @@ a {
   font-size: 16px;
   line-height: 25px;
   text-align: center;
-  color: rgba(255, 255, 255, 0.3);
   text-decoration: none;
+}
+
+.light-link {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.dark-link {
+  color: rgba(0, 0, 0, 0.3);
 }
 
 .request {
   position: absolute;
   top: 40px;
   right: 40px;
+}
+
+.light-request {
   color: rgba(255, 255, 255, 0.3);
 
   a {
     color: $white;
+  }
+}
+
+.dark-request {
+  color: rgba(0, 0, 0, 0.3);
+
+  a {
+    color: $black;
   }
 }
 </style>
