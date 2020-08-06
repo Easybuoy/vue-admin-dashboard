@@ -12,8 +12,15 @@
           class="card card-1"
           :class="{ 'light-card': !isDarkMode, 'dark-card': isDarkMode }"
         >
-          <img src="@/assets/slack.png" alt="slack" class="card-header" />
-          <h3>Slack</h3>
+          <img
+            src="@/assets/slack.png"
+            alt="slack"
+            class="card-header"
+            :class="{ 'light-header': !isDarkMode, 'dark-header': isDarkMode }"
+          />
+          <h3 :class="{ 'light-text': isDarkMode, 'dark-text': !isDarkMode }">
+            Slack
+          </h3>
           <p :class="{ 'light-text': isDarkMode, 'dark-text': !isDarkMode }">
             Messaging app for all team communication
           </p>
@@ -28,8 +35,20 @@
           class="card card-2"
           :class="{ 'light-card': !isDarkMode, 'dark-card': isDarkMode }"
         >
-        </a
-      ></transition>
+          <img
+            src="@/assets/notion.png"
+            alt="slack"
+            class="card-header"
+            :class="{ 'light-header': !isDarkMode, 'dark-header': isDarkMode }"
+          />
+          <h3 :class="{ 'light-text': isDarkMode, 'dark-text': !isDarkMode }">
+            Notion
+          </h3>
+          <p :class="{ 'light-text': isDarkMode, 'dark-text': !isDarkMode }">
+            All-in-one workspace
+          </p>
+        </a></transition
+      >
       <transition
         appear
         appear-active-class="animate__animated animate__flipInX"
@@ -39,8 +58,20 @@
           class="card card-3"
           :class="{ 'light-card': !isDarkMode, 'dark-card': isDarkMode }"
         >
-        </a
-      ></transition>
+          <img
+            src="@/assets/figma.png"
+            alt="slack"
+            class="card-header"
+            :class="{ 'light-header': !isDarkMode, 'dark-header': isDarkMode }"
+          />
+          <h3 :class="{ 'light-text': isDarkMode, 'dark-text': !isDarkMode }">
+            Figma
+          </h3>
+          <p :class="{ 'light-text': isDarkMode, 'dark-text': !isDarkMode }">
+            Collaborative design tool
+          </p>
+        </a></transition
+      >
       <transition
         appear
         appear-active-class="animate__animated animate__flipInX"
@@ -50,8 +81,20 @@
           class="card card-4"
           :class="{ 'light-card': !isDarkMode, 'dark-card': isDarkMode }"
         >
-        </a
-      ></transition>
+          <img
+            src="@/assets/contentful.png"
+            alt="slack"
+            class="card-header"
+            :class="{ 'light-header': !isDarkMode, 'dark-header': isDarkMode }"
+          />
+          <h3 :class="{ 'light-text': isDarkMode, 'dark-text': !isDarkMode }">
+            Contentful
+          </h3>
+          <p :class="{ 'light-text': isDarkMode, 'dark-text': !isDarkMode }">
+            Content management ststem.
+          </p>
+        </a></transition
+      >
       <transition
         appear
         appear-active-class="animate__animated animate__flipInX"
@@ -61,8 +104,20 @@
           class="card card-5"
           :class="{ 'light-card': !isDarkMode, 'dark-card': isDarkMode }"
         >
-        </a
-      ></transition>
+          <img
+            src="@/assets/dropbox.png"
+            alt="slack"
+            class="card-header"
+            :class="{ 'light-header': !isDarkMode, 'dark-header': isDarkMode }"
+          />
+          <h3 :class="{ 'light-text': isDarkMode, 'dark-text': !isDarkMode }">
+            Dropbox
+          </h3>
+          <p :class="{ 'light-text': isDarkMode, 'dark-text': !isDarkMode }">
+            Storage space in the cloud
+          </p>
+        </a></transition
+      >
     </div>
   </div>
 </template>
@@ -131,7 +186,7 @@ h3 {
 p {
   font-size: 15px;
   line-height: 24px;
-  text-align: left;
+  text-align: center;
   margin-left: 16px;
   margin-top: 0;
 }
@@ -152,5 +207,13 @@ p {
   &:hover {
     box-shadow: 0px 30px 60px rgba(255, 255, 255, 0.35);
   }
+}
+
+.light-header {
+  background: $light-gray;
+}
+
+.dark-header {
+  background: #283049;
 }
 </style>
