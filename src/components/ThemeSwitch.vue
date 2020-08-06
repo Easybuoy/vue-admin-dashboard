@@ -53,15 +53,19 @@ export default {
 
 .toggleSwitch {
   border-radius: 8px;
+  padding: 15px 35px;
+  margin: 2px;
 }
 
 .toggle-left {
   background: $white;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  transform: translateX(0);
 }
 
 .toggle-right {
   background: #1b233f;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  transform: translateX(90%);
 }
 </style>
