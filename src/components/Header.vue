@@ -18,7 +18,12 @@ export default {
       user
         .logout()
         .then(() => {
-          this.$router.replace("/signin");
+          this.$router.push({
+            name: "signin",
+            params: {
+              userLoggedOut: true,
+            },
+          });
         })
         .catch((err) => alert(err));
     },

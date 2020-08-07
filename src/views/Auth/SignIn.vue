@@ -3,6 +3,7 @@
     class="container"
     :class="{ 'light-background': !isDarkMode, 'dark-background': isDarkMode }"
   >
+    <Notification v-if="hasText" :text="text" />
     <RequestAccount />
 
     <div class="login">
@@ -43,6 +44,7 @@
 <script>
 import RequestAccount from "@/components/RequestAccount";
 import ThemeSwitch from "@/components/ThemeSwitch";
+import Notification from "@/components/Notification";
 import { auth } from "@/main";
 
 export default {
@@ -56,11 +58,18 @@ export default {
     return {
       email: null,
       password: null,
+      hasText: false,
+      text: "",
     };
   },
   mounted() {
     // #invite_token=3weT8bT844LjpuOtBkm8Bg
     // Ne.open();
+    const params = this.$route.params;
+    if (params.userLoggedOut) {
+      this.hasText = true;
+      this.text = "You have logged out";
+    }
   },
   methods: {
     onSubmit() {
@@ -77,6 +86,7 @@ export default {
   components: {
     RequestAccount,
     ThemeSwitch,
+    Notification,
   },
 };
 </script>
