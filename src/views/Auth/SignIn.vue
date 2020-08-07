@@ -52,14 +52,14 @@ export default {
   computed: {
     isDarkMode() {
       return this.$store.getters.isDarkMode;
-    },
+    }
   },
   data() {
     return {
       email: null,
       password: null,
       hasText: false,
-      text: "",
+      text: ""
     };
   },
   mounted() {
@@ -80,14 +80,14 @@ export default {
         .then(() => {
           this.$router.replace("/");
         })
-        .catch((err) => console.log(err));
-    },
+        .catch(err => console.log(err));
+    }
   },
   components: {
     RequestAccount,
     ThemeSwitch,
-    Notification,
-  },
+    Notification
+  }
 };
 </script>
 

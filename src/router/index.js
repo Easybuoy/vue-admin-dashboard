@@ -16,43 +16,43 @@ const routes = [
     name: "home",
     component: Home,
     meta: {
-      requiresAuth: true,
-    },
+      requiresAuth: true
+    }
   },
   {
     path: "/team",
     name: "team",
     component: Team,
     meta: {
-      requiresAuth: true,
-    },
+      requiresAuth: true
+    }
   },
   {
     path: "/signin",
     name: "signin",
-    component: SignIn,
+    component: SignIn
   },
   {
     path: "/request",
     name: "request",
-    component: Request,
+    component: Request
   },
   {
     path: "/recover",
     name: "recover",
-    component: Recover,
-  },
+    component: Recover
+  }
 ];
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes,
+  routes
 });
 
 router.beforeEach((to, from, next) => {
   const currentUser = netlifyIdentityWidget.currentUser();
-  const requiresAuth = to.matched.some((record) => {
+  const requiresAuth = to.matched.some(record => {
     return record.meta.requiresAuth;
   });
 

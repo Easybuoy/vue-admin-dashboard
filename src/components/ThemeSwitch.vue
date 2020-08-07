@@ -20,13 +20,13 @@ export default {
   computed: {
     isDarkMode() {
       return this.$store.getters.isDarkMode;
-    },
+    }
   },
   methods: {
     toggleDarkMode() {
       this.$store.commit("toggleDarkMode");
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -21,13 +21,13 @@ export default {
           this.$router.push({
             name: "signin",
             params: {
-              userLoggedOut: true,
-            },
+              userLoggedOut: true
+            }
           });
         })
-        .catch((err) => alert(err));
-    },
-  },
+        .catch(err => alert(err));
+    }
+  }
 };
 </script>
 
