@@ -12,18 +12,23 @@
         Sign in to Easybuoy HQ
       </h4>
 
-      <input
-        type="email"
-        placeholder="Email"
-        :class="{ 'light-field': isDarkMode, 'dark-field': !isDarkMode }"
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        :class="{ 'light-field': isDarkMode, 'dark-field': !isDarkMode }"
-      />
-      <button>Sign In</button>
-
+      <form @submit.prevent="onSubmit">
+        <input
+          type="email"
+          placeholder="Email"
+          v-model="email"
+          required
+          :class="{ 'light-field': isDarkMode, 'dark-field': !isDarkMode }"
+        />
+        <input
+          type="password"
+          required
+          placeholder="Password"
+          v-model="password"
+          :class="{ 'light-field': isDarkMode, 'dark-field': !isDarkMode }"
+        />
+        <button>Sign In</button>
+      </form>
       <router-link
         to="/recover"
         :class="{ 'light-link': isDarkMode, 'dark-link': !isDarkMode }"
@@ -38,12 +43,35 @@
 <script>
 import RequestAccount from "@/components/RequestAccount";
 import ThemeSwitch from "@/components/ThemeSwitch";
+import { auth } from "@/main";
 
 export default {
   name: "SignIn",
   computed: {
     isDarkMode() {
       return this.$store.getters.isDarkMode;
+    },
+  },
+  data() {
+    return {
+      email: null,
+      password: null,
+    };
+  },
+  mounted() {
+    // #invite_token=3weT8bT844LjpuOtBkm8Bg
+    // Ne.open();
+  },
+  methods: {
+    onSubmit() {
+      const { email, password } = this;
+
+      auth
+        .login(email, password, true)
+        .then(() => {
+          this.$router.replace("/");
+        })
+        .catch((err) => console.log(err));
     },
   },
   components: {
@@ -63,5 +91,6 @@ export default {
 
 .login {
   width: 400px;
+  margin: 0 auto;
 }
 </style>
