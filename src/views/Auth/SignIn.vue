@@ -52,23 +52,24 @@ export default {
   computed: {
     isDarkMode() {
       return this.$store.getters.isDarkMode;
-    }
+    },
   },
   data() {
     return {
       email: null,
       password: null,
       hasText: false,
-      text: ""
+      text: "",
     };
   },
   mounted() {
-    // #invite_token=3weT8bT844LjpuOtBkm8Bg
-    // Ne.open();
     const params = this.$route.params;
     if (params.userLoggedOut) {
       this.hasText = true;
       this.text = "You have logged out";
+    } else if (params.userRecoverdAccount) {
+      this.hasText = true;
+      this.text = `A recovery email has been sent to ${params.email}`;
     }
   },
   methods: {
@@ -80,14 +81,14 @@ export default {
         .then(() => {
           this.$router.replace("/");
         })
-        .catch(err => console.log(err));
-    }
+        .catch((err) => console.log(err));
+    },
   },
   components: {
     RequestAccount,
     ThemeSwitch,
-    Notification
-  }
+    Notification,
+  },
 };
 </script>
 
