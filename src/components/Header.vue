@@ -1,5 +1,5 @@
 <template>
-  <div id="nav">
+  <div id="nav" :class="{ 'nav-light': !isDarkMode, 'nav-dark': isDarkMode }">
     <div class="nav-1">
       <img src="@/assets/logo.svg" alt="logo" />
       <router-link
@@ -7,8 +7,16 @@
         :class="{ 'light-nav': !isDarkMode, 'dark-nav': isDarkMode }"
         >Home</router-link
       >
-      <router-link to="/manage">Manage Users</router-link>
-      <router-link to="/about">About</router-link>
+      <router-link
+        to="/manage"
+        :class="{ 'light-nav': !isDarkMode, 'dark-nav': isDarkMode }"
+        >Manage Users</router-link
+      >
+      <router-link
+        to="/about"
+        :class="{ 'light-nav': !isDarkMode, 'dark-nav': isDarkMode }"
+        >About</router-link
+      >
     </div>
 
     <a @click="onClick"><img src="@/assets/logout.svg" /> Logout</a>
@@ -45,11 +53,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.nav-light {
+  background: $white;
+}
+
+.nav-dark {
+  background: $super-dark-blue;
+}
+
 #nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: $super-dark-blue;
   box-sizing: border-box;
   width: 100%;
   padding: 15px 15%;

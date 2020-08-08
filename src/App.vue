@@ -1,5 +1,8 @@
 <template>
-  <div id="app">
+  <div
+    id="app"
+    :class="{ 'light-background': !isDarkMode, 'light-background': isDarkMode }"
+  >
     <router-view />
   </div>
 </template>
@@ -12,6 +15,11 @@ export default {
   mounted() {
     const isDarkMode = this.$store.getters.isDarkMode;
     document.body.style.backgroundColor = isDarkMode ? "#212c4f" : "#f0f3f5";
+  },
+  computed: {
+    isDarkMode() {
+      return this.$store.getters.isDarkMode;
+    },
   },
 };
 </script>
@@ -33,6 +41,12 @@ h1 {
 p {
   @include large-text-bold;
 }
+
+line,
+text {
+  opacity: 0.2;
+}
+
 #app {
   font-family: $system-font-family;
   -webkit-font-smoothing: antialiased;
@@ -43,10 +57,20 @@ p {
 /* THEME */
 .light-background {
   background-color: $light-gray;
+
+  line,
+  text {
+    stroke: $black;
+  }
 }
 
 .dark-background {
   background-color: $dark-blue;
+
+  line,
+  text {
+    stroke: $light-gray;
+  }
 }
 
 .light-text {
@@ -85,10 +109,14 @@ p {
   color: rgba(0, 0, 0, 0.3);
 }
 
-line,
-text {
-  stroke: $light-gray;
-  opacity: 0.2;
+.light-box {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark-box {
+  background: rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 h4 {

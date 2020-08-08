@@ -4,9 +4,14 @@
 
     <div class="container">
       <div class="spread">
-        <h1>Traffic Overview</h1>
+        <h1 :class="{ dark: !isDarkMode, light: isDarkMode }">
+          Traffic Overview
+        </h1>
 
-        <div class="toggle">
+        <div
+          class="toggle"
+          :class="{ 'light-box': isDarkMode, 'dark-box': !isDarkMode }"
+        >
           <div ref="days" class="days" @click="toggleDays">Days</div>
           <div ref="weeks" class="weeks" @click="toggleWeeks">Weeks</div>
           <div ref="months" class="months" @click="toggleMonths">Months</div>
@@ -21,9 +26,20 @@
       ></apexchart>
 
       <iframe
+        v-if="isDarkMode"
         width="600"
         height="450"
-        src="https://datastudio.google.com/embed/reporting/f848acde-4800-4128-b558-9a453659907b/page/kPIbB"
+        src="https://datastudio.google.com/embed/reporting/3e28257b-c2a8-4df8-8da5-240ce25e88af/page/kPIbB"
+        frameborder="0"
+        style="border:0"
+        allowfullscreen
+      ></iframe>
+
+      <iframe
+        v-if="!isDarkMode"
+        width="600"
+        height="450"
+        src="https://datastudio.google.com/embed/reporting/c0e1eff4-1162-43ea-acd2-752792916d16/page/kPIbB"
         frameborder="0"
         style="border:0"
         allowfullscreen
@@ -50,7 +66,7 @@ export default {
         colors: ["#14f1d9", "#7b42f6"],
         legend: {
           labels: {
-            colors: ["white"],
+            colors: [this.$store.getters.isDarkMode ? "white" : "black"],
           },
           position: "top",
         },
@@ -93,6 +109,11 @@ export default {
         },
       ],
     };
+  },
+  computed: {
+    isDarkMode() {
+      return this.$store.getters.isDarkMode;
+    },
   },
   methods: {
     toggleDays() {
@@ -149,8 +170,12 @@ export default {
   width: 100%;
 }
 
-h1 {
-  @include heading-3;
+h1.dark {
+  @include heading-3($black);
+}
+
+h1.light {
+  @include heading-3($white);
 }
 
 .toggle {
@@ -162,8 +187,6 @@ h1 {
   padding: 5px;
   display: flex;
   flex-wrap: nowrap;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.1);
 
   &:hover {
     cursor: pointer;
