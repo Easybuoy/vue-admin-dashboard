@@ -64,7 +64,7 @@ export default {
 
       // Slack API Logic
       let slackURL = new URL(config.VUE_APP_SLACK_URL);
-
+      console.log(config.VUE_APP_SLACK_TOKEN);
       const data = {
         token: config.VUE_APP_SLACK_TOKEN,
         channel: "hq",
@@ -73,17 +73,19 @@ export default {
 
       slackURL.search = new URLSearchParams(data);
 
-      fetch(slackURL).then(() => {
-        this.$router
-          .push({
-            name: "signin",
-            params: {
-              userRequestedAccount: true,
-              email,
-            },
-          })
-          .catch((err) => alert(err));
-      });
+      fetch(slackURL)
+        .then((res) => res.json())
+        .then(() => {
+          this.$router
+            .push({
+              name: "signin",
+              params: {
+                userRequestedAccount: true,
+                email,
+              },
+            })
+            .catch((err) => alert(err));
+        });
     },
   },
   components: {
