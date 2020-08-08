@@ -4,6 +4,7 @@
     :class="{ 'light-background': !isDarkMode, 'dark-background': isDarkMode }"
   >
     <RequestAccount />
+    <Notification v-if="hasText" :text="text" :success="isSuccess" />
 
     <div class="login">
       <img src="@/assets/logo.svg" alt="logo" />
@@ -37,6 +38,8 @@
 <script>
 import RequestAccount from "@/components/RequestAccount";
 import ThemeSwitch from "@/components/ThemeSwitch";
+import Notification from "@/components/Notification";
+
 import { auth } from "@/main";
 
 export default {
@@ -52,6 +55,7 @@ export default {
       hasText: false,
       text: "",
       recoverText: "Send Email",
+      isSuccess: false,
     };
   },
   mounted() {
@@ -64,6 +68,9 @@ export default {
   methods: {
     onSubmit() {
       const { email } = this;
+      this.isSuccess = false;
+      this.hasText = false;
+      this.text = "";
       this.recoverText = "Sending Recovery Email...";
 
       auth
@@ -78,15 +85,17 @@ export default {
             },
           });
         })
-        .catch((err) => {
+        .catch(() => {
           this.recoverText = "Send Email";
-          alert(err);
+          this.hasText = true;
+          this.text = `Error sending recovery email!`;
         });
     },
   },
   components: {
     RequestAccount,
     ThemeSwitch,
+    Notification,
   },
 };
 </script>

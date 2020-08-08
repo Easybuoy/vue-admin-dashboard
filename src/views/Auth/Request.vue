@@ -97,7 +97,6 @@ export default {
           this.hasText = true;
           this.text = `Error requesing account creation at this time`;
           this.requestAccountText = "Request Account";
-          // alert(err.message);
         });
     },
   },
