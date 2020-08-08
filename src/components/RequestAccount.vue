@@ -8,7 +8,7 @@
       :class="{ 'light-request': isDarkMode, 'dark-request': !isDarkMode }"
       v-show="show"
     >
-      Don't have a Easybuoy HQ account?
+      Don't have an Easybuoy HQ account?
       <router-link to="/request">Request an account</router-link>
     </div>
   </transition>

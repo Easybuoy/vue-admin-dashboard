@@ -1,7 +1,7 @@
 <template>
   <div
     id="app"
-    :class="{ 'light-background': !isDarkMode, 'light-background': isDarkMode }"
+    :class="{ 'light-background': isDarkMode, 'light-background': !isDarkMode }"
   >
     <router-view />
   </div>

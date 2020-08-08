@@ -28,7 +28,7 @@
           v-model="password"
           :class="{ 'light-field': isDarkMode, 'dark-field': !isDarkMode }"
         />
-        <button>Sign In</button>
+        <button ref="signinText">{{ signInText }}</button>
       </form>
       <router-link
         to="/recover"
@@ -60,6 +60,7 @@ export default {
       password: null,
       hasText: false,
       text: "",
+      signInText: "Sign In",
     };
   },
   mounted() {
@@ -78,13 +79,19 @@ export default {
   methods: {
     onSubmit() {
       const { email, password } = this;
+      this.signInText = "Signing in...";
 
       auth
         .login(email, password, true)
         .then(() => {
+          this.signInText = "Sign In";
           this.$router.replace("/");
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          this.signInText = "Sign In";
+          console.log(err);
+          alert(err);
+        });
     },
   },
   components: {

@@ -21,7 +21,7 @@
           :class="{ 'light-field': isDarkMode, 'dark-field': !isDarkMode }"
         />
 
-        <button>Send Email</button>
+        <button>{{ recoverText }}</button>
       </form>
       <router-link
         to="/signin"
@@ -51,6 +51,7 @@ export default {
       email: null,
       hasText: false,
       text: "",
+      recoverText: "Send Email",
     };
   },
   mounted() {
@@ -63,10 +64,12 @@ export default {
   methods: {
     onSubmit() {
       const { email } = this;
+      this.recoverText = "Sending Recovery Email...";
 
       auth
         .requestPasswordRecovery(email)
         .then(() => {
+          this.recoverText = "Send Email";
           this.$router.push({
             name: "signin",
             params: {
@@ -75,7 +78,10 @@ export default {
             },
           });
         })
-        .catch((err) => alert(err));
+        .catch((err) => {
+          this.recoverText = "Send Email";
+          alert(err);
+        });
     },
   },
   components: {

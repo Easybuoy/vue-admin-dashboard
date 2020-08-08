@@ -19,7 +19,7 @@
           :class="{ 'light-field': isDarkMode, 'dark-field': !isDarkMode }"
         />
 
-        <button>Request Account</button>
+        <button>{{ requestAccountText }}</button>
       </form>
       <router-link
         to="/signin"
@@ -49,6 +49,7 @@ export default {
       email: null,
       hasText: false,
       text: "",
+      requestAccountText: "Request Account",
     };
   },
   mounted() {
@@ -61,7 +62,7 @@ export default {
   methods: {
     onSubmit() {
       const { email } = this;
-
+      this.requestAccountText = "Requesting Account...";
       // Slack API Logic
       let slackURL = new URL(config.VUE_APP_SLACK_URL);
       console.log(config.VUE_APP_SLACK_TOKEN);
@@ -76,6 +77,7 @@ export default {
       fetch(slackURL)
         .then((res) => res.json())
         .then(() => {
+          this.requestAccountText = "Request Account";
           this.$router
             .push({
               name: "signin",
@@ -84,7 +86,10 @@ export default {
                 email,
               },
             })
-            .catch((err) => alert(err));
+            .catch((err) => {
+              this.requestAccountText = "Request Account";
+              alert(err);
+            });
         });
     },
   },
