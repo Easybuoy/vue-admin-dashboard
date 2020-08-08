@@ -80,6 +80,8 @@ export default {
     onSubmit() {
       const { email, password } = this;
       this.signInText = "Signing in...";
+      this.hasText = false;
+      this.text = "";
 
       auth
         .login(email, password, true)
@@ -89,8 +91,13 @@ export default {
         })
         .catch((err) => {
           this.signInText = "Sign In";
-          console.log(err);
-          alert(err);
+          console.log(err.message);
+          this.text = "Invalid logging details";
+          this.hasText = true;
+          // setTimeout(() => {
+          //   this.text = "";
+          //   this.hasText = false;
+          // }, 500);
         });
     },
   },

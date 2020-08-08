@@ -88,7 +88,7 @@ export default {
             })
             .catch((err) => {
               this.requestAccountText = "Request Account";
-              alert(err);
+              alert(err.message);
             });
         });
     },
