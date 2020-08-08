@@ -81,7 +81,7 @@ export default {
 
       slackURL.search = new URLSearchParams(data);
 
-      fetch(`slackURLa`)
+      fetch(slackURL)
         .then((res) => res.json())
         .then(() => {
           this.requestAccountText = "Request Account";
