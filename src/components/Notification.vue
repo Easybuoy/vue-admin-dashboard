@@ -3,7 +3,11 @@
     enter-active-class="animate__animated animate__fadeInDown"
     leave-active-class="animate__animated animate__fadeOutRight"
   >
-    <div class="bubble" v-show="show">
+    <div
+      class="bubble"
+      v-show="show"
+      :class="{ success: success, danger: !success }"
+    >
       <div class="message">{{ text }}</div>
     </div>
   </transition>
@@ -13,11 +17,12 @@
 export default {
   name: "Notification",
   props: {
-    text: String
+    text: String,
+    success: Boolean,
   },
   data() {
     return {
-      show: false
+      show: false,
     };
   },
   mounted() {
@@ -26,7 +31,7 @@ export default {
     setTimeout(() => {
       this.show = false;
     }, 3000);
-  }
+  },
 };
 </script>
 
@@ -36,9 +41,15 @@ export default {
   position: absolute;
   top: 10%;
   padding: 5px 10px 5px 10px;
+}
+
+.success {
   background-color: $blue;
 }
 
+.danger {
+  background-color: $danger;
+}
 .message {
   @include medium-text;
   color: $white;

@@ -3,7 +3,7 @@
     class="container"
     :class="{ 'light-background': !isDarkMode, 'dark-background': isDarkMode }"
   >
-    <Notification v-if="hasText" :text="text" />
+    <Notification v-if="hasText" :text="text" :success="isSuccess" />
     <RequestAccount />
 
     <div class="login">
@@ -61,6 +61,7 @@ export default {
       hasText: false,
       text: "",
       signInText: "Sign In",
+      isSuccess: false,
     };
   },
   mounted() {
@@ -68,12 +69,15 @@ export default {
     if (params.userLoggedOut) {
       this.hasText = true;
       this.text = "You have logged out";
+      this.isSuccess = true;
     } else if (params.userRecoverdAccount) {
       this.hasText = true;
       this.text = `A recovery email has been sent to ${params.email}`;
+      this.isSuccess = true;
     } else if (params.userRequestedAccount) {
       this.hasText = true;
       this.text = `Your request has been sent to an administrator for ${params.email}`;
+      this.isSuccess = true;
     }
   },
   methods: {
@@ -89,15 +93,10 @@ export default {
           this.signInText = "Sign In";
           this.$router.replace("/");
         })
-        .catch((err) => {
+        .catch(() => {
           this.signInText = "Sign In";
-          console.log(err.message);
-          this.text = "Invalid logging details";
+          this.text = "Invalid logging details!";
           this.hasText = true;
-          // setTimeout(() => {
-          //   this.text = "";
-          //   this.hasText = false;
-          // }, 500);
         });
     },
   },
