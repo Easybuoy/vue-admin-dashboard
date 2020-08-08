@@ -19,6 +19,15 @@
         :options="chartOptions"
         :series="series"
       ></apexchart>
+
+      <iframe
+        width="600"
+        height="450"
+        src="https://datastudio.google.com/embed/reporting/f848acde-4800-4128-b558-9a453659907b/page/kPIbB"
+        frameborder="0"
+        style="border:0"
+        allowfullscreen
+      ></iframe>
     </div>
   </div>
 </template>
@@ -38,17 +47,49 @@ export default {
   data() {
     return {
       chartOptions: {
+        colors: ["#14f1d9", "#7b42f6"],
+        legend: {
+          labels: {
+            colors: ["white"],
+          },
+          position: "top",
+        },
+        tooltip: {
+          theme: "dark",
+        },
+        grid: {
+          xaxis: {
+            lines: {
+              show: true,
+            },
+          },
+          yaxis: {
+            lines: {
+              show: false,
+            },
+          },
+        },
         chart: {
           id: "users",
         },
         xaxis: {
-          categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998],
+          type: "datetime",
         },
       },
       series: [
         {
-          name: "series-1",
-          data: [30, 40, 35, 50, 49, 60, 70, 91],
+          name: "active users",
+          data: [
+            [new Date("January 1, 2019"), 30],
+            [new Date("January 5, 2019"), 40],
+          ],
+        },
+        {
+          name: "new users",
+          data: [
+            [new Date("January 1, 2019"), 80],
+            [new Date("January 5, 2019"), 40],
+          ],
         },
       ],
     };

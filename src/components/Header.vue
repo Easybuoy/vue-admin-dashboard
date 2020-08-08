@@ -65,6 +65,10 @@ export default {
     &.router-link-exact-active.light-nav {
       color: $middle-blue;
     }
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 

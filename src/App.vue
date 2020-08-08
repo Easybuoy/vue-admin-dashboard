@@ -85,6 +85,12 @@ p {
   color: rgba(0, 0, 0, 0.3);
 }
 
+line,
+text {
+  stroke: $light-gray;
+  opacity: 0.2;
+}
+
 h4 {
   line-height: 34px;
   font-size: 24px;
