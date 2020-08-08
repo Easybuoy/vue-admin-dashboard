@@ -3,6 +3,8 @@
     class="container"
     :class="{ 'light-background': !isDarkMode, 'dark-background': isDarkMode }"
   >
+    <Notification v-if="hasText" :text="text" :success="isSuccess" />
+
     <div class="login">
       <img src="@/assets/logo.svg" alt="logo" />
 
@@ -34,6 +36,7 @@
 
 <script>
 import ThemeSwitch from "@/components/ThemeSwitch";
+import Notification from "@/components/Notification";
 
 import config from "../../config";
 
@@ -50,6 +53,7 @@ export default {
       hasText: false,
       text: "",
       requestAccountText: "Request Account",
+      isSuccess: false,
     };
   },
   mounted() {
@@ -63,6 +67,9 @@ export default {
     onSubmit() {
       const { email } = this;
       this.requestAccountText = "Requesting Account...";
+      this.isSuccess = false;
+      this.hasText = false;
+      this.text = "";
       // Slack API Logic
       let slackURL = new URL(config.VUE_APP_SLACK_URL);
       console.log(config.VUE_APP_SLACK_TOKEN);
@@ -74,27 +81,29 @@ export default {
 
       slackURL.search = new URLSearchParams(data);
 
-      fetch(slackURL)
+      fetch(`slackURLa`)
         .then((res) => res.json())
         .then(() => {
           this.requestAccountText = "Request Account";
-          this.$router
-            .push({
-              name: "signin",
-              params: {
-                userRequestedAccount: true,
-                email,
-              },
-            })
-            .catch((err) => {
-              this.requestAccountText = "Request Account";
-              alert(err.message);
-            });
+          this.$router.push({
+            name: "signin",
+            params: {
+              userRequestedAccount: true,
+              email,
+            },
+          });
+        })
+        .catch(() => {
+          this.hasText = true;
+          this.text = `Error requesing account creation at this time`;
+          this.requestAccountText = "Request Account";
+          // alert(err.message);
         });
     },
   },
   components: {
     ThemeSwitch,
+    Notification,
   },
 };
 </script>
