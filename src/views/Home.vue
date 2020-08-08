@@ -12,18 +12,46 @@
           <div ref="months" class="months" @click="toggleMonths">Months</div>
         </div>
       </div>
+
+      <apexchart
+        width="100%"
+        type="area"
+        :options="chartOptions"
+        :series="series"
+      ></apexchart>
     </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
+import VueApexCharts from "vue-apexcharts";
+
 import Header from "@/components/Header";
 
 export default {
   name: "Home",
   components: {
     Header,
+    apexchart: VueApexCharts,
+  },
+  data() {
+    return {
+      chartOptions: {
+        chart: {
+          id: "users",
+        },
+        xaxis: {
+          categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998],
+        },
+      },
+      series: [
+        {
+          name: "series-1",
+          data: [30, 40, 35, 50, 49, 60, 70, 91],
+        },
+      ],
+    };
   },
   methods: {
     toggleDays() {
@@ -95,6 +123,10 @@ h1 {
   flex-wrap: nowrap;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.1);
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 @mixin toggle-settings {
@@ -107,6 +139,9 @@ h1 {
 
 .days {
   @include toggle-settings;
+  background: $teal;
+  border-radius: 4px;
+  color: $white;
 }
 
 .weeks {
