@@ -9,7 +9,7 @@
       <img src="@/assets/logo.svg" alt="logo" />
 
       <h4 :class="{ 'light-text': isDarkMode, 'dark-text': !isDarkMode }">
-        Sign in to Easybuoy HQ
+        Recover Account
       </h4>
 
       <form @submit.prevent="onSubmit">
@@ -64,15 +64,18 @@ export default {
     onSubmit() {
       const { email } = this;
 
-      auth.requestPasswordRecovery(email).then(() => {
-        this.$router.push({
-          name: "signin",
-          params: {
-            userRecoverdAccount: true,
-            email,
-          },
-        });
-      });
+      auth
+        .requestPasswordRecovery(email)
+        .then(() => {
+          this.$router.push({
+            name: "signin",
+            params: {
+              userRecoverdAccount: true,
+              email,
+            },
+          });
+        })
+        .catch((err) => alert(err));
     },
   },
   components: {
@@ -93,5 +96,6 @@ export default {
 .login {
   width: 400px;
   margin: 0 auto;
+  text-align: center;
 }
 </style>

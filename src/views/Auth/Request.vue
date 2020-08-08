@@ -3,14 +3,11 @@
     class="container"
     :class="{ 'light-background': !isDarkMode, 'dark-background': isDarkMode }"
   >
-    <Notification v-if="hasText" :text="text" />
-    <RequestAccount />
-
     <div class="login">
       <img src="@/assets/logo.svg" alt="logo" />
 
       <h4 :class="{ 'light-text': isDarkMode, 'dark-text': !isDarkMode }">
-        Sign in to Easybuoy HQ
+        Request Account
       </h4>
 
       <form @submit.prevent="onSubmit">
@@ -21,19 +18,13 @@
           required
           :class="{ 'light-field': isDarkMode, 'dark-field': !isDarkMode }"
         />
-        <input
-          type="password"
-          required
-          placeholder="Password"
-          v-model="password"
-          :class="{ 'light-field': isDarkMode, 'dark-field': !isDarkMode }"
-        />
-        <button>Sign In</button>
+
+        <button>Request Account</button>
       </form>
       <router-link
-        to="/recover"
+        to="/signin"
         :class="{ 'light-link': isDarkMode, 'dark-link': !isDarkMode }"
-        >Forgot your password?
+        >Already have an account? Sign in now.
       </router-link>
 
       <ThemeSwitch />
@@ -42,29 +33,25 @@
 </template>
 
 <script>
-import RequestAccount from "@/components/RequestAccount";
 import ThemeSwitch from "@/components/ThemeSwitch";
-import Notification from "@/components/Notification";
-import { auth } from "@/main";
+
+import config from "../../config";
 
 export default {
   name: "Request",
   computed: {
     isDarkMode() {
       return this.$store.getters.isDarkMode;
-    }
+    },
   },
   data() {
     return {
       email: null,
-      password: null,
       hasText: false,
-      text: ""
+      text: "",
     };
   },
   mounted() {
-    // #invite_token=3weT8bT844LjpuOtBkm8Bg
-    // Ne.open();
     const params = this.$route.params;
     if (params.userLoggedOut) {
       this.hasText = true;
@@ -73,21 +60,35 @@ export default {
   },
   methods: {
     onSubmit() {
-      const { email, password } = this;
+      const { email } = this;
 
-      auth
-        .login(email, password, true)
-        .then(() => {
-          this.$router.replace("/");
-        })
-        .catch(err => console.log(err));
-    }
+      // Slack API Logic
+      let slackURL = new URL(config.VUE_APP_SLACK_URL);
+
+      const data = {
+        token: config.VUE_APP_SLACK_TOKEN,
+        channel: "hq",
+        text: `${email} has requested admin access to Easybuoy HQ. Please go to Netlify to invite them`,
+      };
+
+      slackURL.search = new URLSearchParams(data);
+
+      fetch(slackURL).then(() => {
+        this.$router
+          .push({
+            name: "signin",
+            params: {
+              userRequestedAccount: true,
+              email,
+            },
+          })
+          .catch((err) => alert(err));
+      });
+    },
   },
   components: {
-    RequestAccount,
     ThemeSwitch,
-    Notification
-  }
+  },
 };
 </script>
 
@@ -102,5 +103,6 @@ export default {
 .login {
   width: 400px;
   margin: 0 auto;
+  text-align: center;
 }
 </style>
