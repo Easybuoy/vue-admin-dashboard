@@ -1,9 +1,17 @@
 <template>
   <div id="nav">
-    <router-link to="/">Home</router-link>|
-    <router-link to="/about">About</router-link>
+    <div class="nav-1">
+      <img src="@/assets/logo.svg" alt="logo" />
+      <router-link
+        to="/"
+        :class="{ 'light-nav': !isDarkMode, 'dark-nav': isDarkMode }"
+        >Home</router-link
+      >
+      <router-link to="/manage">Manage Users</router-link>
+      <router-link to="/about">About</router-link>
+    </div>
 
-    <a @click="onClick">Logout</a>
+    <a @click="onClick"><img src="@/assets/logout.svg" /> Logout</a>
   </div>
 </template>
 
@@ -21,14 +29,57 @@ export default {
           this.$router.push({
             name: "signin",
             params: {
-              userLoggedOut: true
-            }
+              userLoggedOut: true,
+            },
           });
         })
-        .catch(err => alert(err));
-    }
-  }
+        .catch((err) => alert(err));
+    },
+  },
+  computed: {
+    isDarkMode() {
+      return this.$store.getters.isDarkMode;
+    },
+  },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+#nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: $super-dark-blue;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 15px 15%;
+
+  a {
+    font-weight: bold;
+    color: $dark-gray;
+
+    &.router-link-exact-active.dark-nav {
+      color: $white;
+    }
+
+    &.router-link-exact-active.light-nav {
+      color: $middle-blue;
+    }
+  }
+}
+
+.nav-1 {
+  display: flex;
+  align-items: center;
+
+  img {
+    width: 100px;
+    /* height: 100px; */
+    margin-right: 20px;
+  }
+
+  a {
+    margin: 0 20px;
+  }
+}
+</style>

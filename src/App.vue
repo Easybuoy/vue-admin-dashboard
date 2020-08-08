@@ -12,7 +12,7 @@ export default {
   mounted() {
     const isDarkMode = this.$store.getters.isDarkMode;
     document.body.style.backgroundColor = isDarkMode ? "#212c4f" : "#f0f3f5";
-  }
+  },
 };
 </script>
 
@@ -23,6 +23,7 @@ export default {
 
 body {
   background-color: $dark-blue;
+  margin: 0;
 }
 
 h1 {
@@ -37,19 +38,6 @@ p {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: $white;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: $white;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
 }
 
 /* THEME */
