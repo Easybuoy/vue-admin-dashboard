@@ -68,7 +68,7 @@ export default {
     const params = this.$route.params;
     if (params.userLoggedOut) {
       this.hasText = true;
-      this.text = "You have logged out";
+      this.text = "You have logged out!";
       this.isSuccess = true;
     } else if (params.userRecoverdAccount) {
       this.hasText = true;
