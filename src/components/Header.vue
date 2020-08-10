@@ -7,15 +7,15 @@
         :class="{ 'light-nav': !isDarkMode, 'dark-nav': isDarkMode }"
         >Home</router-link
       >
-      <router-link
+      <!-- <router-link
         to="/manage"
         :class="{ 'light-nav': !isDarkMode, 'dark-nav': isDarkMode }"
         >Manage Users</router-link
-      >
+      > -->
       <router-link
-        to="/about"
+        to="/team"
         :class="{ 'light-nav': !isDarkMode, 'dark-nav': isDarkMode }"
-        >About</router-link
+        >Team</router-link
       >
     </div>
 

@@ -27,9 +27,9 @@
 
       <iframe
         v-if="isDarkMode"
-        width="600"
-        height="450"
-        src="https://datastudio.google.com/embed/reporting/3e28257b-c2a8-4df8-8da5-240ce25e88af/page/kPIbB"
+        width="100%"
+        height="600"
+        src="https://datastudio.google.com/embed/reporting/f848acde-4800-4128-b558-9a453659907b/page/kPIbB"
         frameborder="0"
         style="border:0"
         allowfullscreen
@@ -37,9 +37,9 @@
 
       <iframe
         v-if="!isDarkMode"
-        width="600"
-        height="450"
-        src="https://datastudio.google.com/embed/reporting/c0e1eff4-1162-43ea-acd2-752792916d16/page/kPIbB"
+        width="100%"
+        height="600"
+        src="https://datastudio.google.com/embed/reporting/d2c16181-55b6-4709-ad68-0d955a30c23c/page/kPIbB"
         frameborder="0"
         style="border:0"
         allowfullscreen

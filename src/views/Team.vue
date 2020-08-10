@@ -1,6 +1,9 @@
 <template>
   <div class="container">
-    <h2>Team</h2>
+    <Header />
+    <h2 :class="{ 'light-text': isDarkMode, 'dark-text': !isDarkMode }">
+      Team
+    </h2>
 
     <div class="cards">
       <transition
@@ -123,13 +126,18 @@
 </template>
 
 <script>
+import Header from "@/components/Header";
+
 export default {
   name: "Team",
   computed: {
     isDarkMode() {
       return this.$store.getters.isDarkMode;
-    }
-  }
+    },
+  },
+  components: {
+    Header,
+  },
 };
 </script>
 
@@ -139,7 +147,9 @@ export default {
 }
 
 h2 {
-  @include heading-2;
+  font-size: 60px;
+  line-height: 86px;
+  font-weight: bold;
   text-align: center;
 }
 
@@ -180,7 +190,9 @@ h2 {
 }
 
 h3 {
-  @include heading-3;
+  font-size: 30px;
+  line-height: 43px;
+  font-weight: bold;
   margin-bottom: 16px;
 }
 
