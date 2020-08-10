@@ -53,6 +53,7 @@
 import VueApexCharts from "vue-apexcharts";
 
 import Header from "@/components/Header";
+import { db } from "@/config/firebase";
 
 export default {
   name: "Home",
@@ -92,22 +93,47 @@ export default {
           type: "datetime",
         },
       },
-      series: [
-        {
-          name: "active users",
-          data: [
-            [new Date("January 1, 2019"), 30],
-            [new Date("January 5, 2019"), 40],
-          ],
+      series: [],
+    };
+  },
+  firestore() {
+    return {
+      traffic: {
+        ref: db.collection("traffic"),
+        objects: true,
+        resolve: (traffic) => {
+          const activeUsers = [];
+          const newUsers = Object.values(traffic.newUsers);
+
+          const todaysDate = new Date();
+          const lastWeekDate = todaysDate.setDate(todaysDate.getDate() - 7);
+          Object.keys(traffic.activeUsers).map((key) => {
+            if (new Date(traffic.activeUsers[key][0]) > lastWeekDate) {
+              activeUsers.push(traffic.activeUsers[key]);
+            }
+          });
+
+          Object.keys(traffic.newUsers).map((key) => {
+            if (new Date(traffic.newUsers[key][0]) > lastWeekDate) {
+              newUsers.push(traffic.newUsers[key]);
+            }
+          });
+
+          this.series = [
+            {
+              name: "active users",
+              data: activeUsers,
+            },
+            {
+              name: "new users",
+              data: newUsers,
+            },
+          ];
         },
-        {
-          name: "new users",
-          data: [
-            [new Date("January 1, 2019"), 80],
-            [new Date("January 5, 2019"), 40],
-          ],
+        reject: (err) => {
+          console.log(err);
         },
-      ],
+      },
     };
   },
   computed: {
@@ -128,6 +154,44 @@ export default {
       this.$refs.months.style.color = "#5b6175";
       this.$refs.months.style.background = "none";
       this.$refs.months.style.borderRadius = "none";
+
+      const activeUsers = [];
+      const newUsers = [];
+      // Binding docs
+      this.$binding("activeUsers", db.collection("traffic").doc("activeUsers"))
+        .then((data) => {
+          console.log(data);
+          const todaysDate = new Date();
+          const lastWeekDate = todaysDate.setDate(todaysDate.getDate() - 7);
+          Object.keys(data).map((key) => {
+            if (new Date(data[key][0]) > lastWeekDate) {
+              activeUsers.push(data[key]);
+            }
+          });
+        })
+        .catch((err) => console.log(err));
+
+      this.$binding("newUsers", db.collection("traffic").doc("newUsers"))
+        .then((data) => {
+          const todaysDate = new Date();
+          const lastWeekDate = todaysDate.setDate(todaysDate.getDate() - 7);
+          Object.keys(data).map((key) => {
+            if (new Date(data[key][0]) > lastWeekDate) {
+              newUsers.push(data[key]);
+            }
+          });
+          this.series = [
+            {
+              name: "active users",
+              data: activeUsers,
+            },
+            {
+              name: "new users",
+              data: newUsers,
+            },
+          ];
+        })
+        .catch((err) => console.log(err));
     },
     toggleWeeks() {
       this.$refs.weeks.style.color = "white";
@@ -141,6 +205,43 @@ export default {
       this.$refs.months.style.color = "#5b6175";
       this.$refs.months.style.background = "none";
       this.$refs.months.style.borderRadius = "none";
+
+      const activeUsers = [];
+      const newUsers = [];
+      // Binding docs
+      this.$binding("activeUsers", db.collection("traffic").doc("activeUsers"))
+        .then((data) => {
+          const todaysDate = new Date();
+          const lastMonthsDate = todaysDate.setDate(todaysDate.getDate() - 30);
+          Object.keys(data).map((key) => {
+            if (new Date(data[key][0]) > lastMonthsDate) {
+              activeUsers.push(data[key]);
+            }
+          });
+        })
+        .catch((err) => console.log(err));
+
+      this.$binding("newUsers", db.collection("traffic").doc("newUsers"))
+        .then((data) => {
+          const todaysDate = new Date();
+          const lastMonthsDate = todaysDate.setDate(todaysDate.getDate() - 30);
+          Object.keys(data).map((key) => {
+            if (new Date(data[key][0]) > lastMonthsDate) {
+              newUsers.push(data[key]);
+            }
+          });
+          this.series = [
+            {
+              name: "active users",
+              data: activeUsers,
+            },
+            {
+              name: "new users",
+              data: newUsers,
+            },
+          ];
+        })
+        .catch((err) => console.log(err));
     },
     toggleMonths() {
       this.$refs.months.style.color = "white";
@@ -154,6 +255,43 @@ export default {
       this.$refs.days.style.color = "#5b6175";
       this.$refs.days.style.background = "none";
       this.$refs.days.style.borderRadius = "4px";
+
+      const activeUsers = [];
+      const newUsers = [];
+      // Binding docs
+      this.$binding("activeUsers", db.collection("traffic").doc("activeUsers"))
+        .then((data) => {
+          const todaysDate = new Date();
+          const lastYearDate = todaysDate.setDate(todaysDate.getDate() - 365);
+          Object.keys(data).map((key) => {
+            if (new Date(data[key][0]) > lastYearDate) {
+              activeUsers.push(data[key]);
+            }
+          });
+        })
+        .catch((err) => console.log(err));
+
+      this.$binding("newUsers", db.collection("traffic").doc("newUsers"))
+        .then((data) => {
+          const todaysDate = new Date();
+          const lastYearDate = todaysDate.setDate(todaysDate.getDate() - 365);
+          Object.keys(data).map((key) => {
+            if (new Date(data[key][0]) > lastYearDate) {
+              newUsers.push(data[key]);
+            }
+          });
+          this.series = [
+            {
+              name: "active users",
+              data: activeUsers,
+            },
+            {
+              name: "new users",
+              data: newUsers,
+            },
+          ];
+        })
+        .catch((err) => console.log(err));
     },
   },
 };

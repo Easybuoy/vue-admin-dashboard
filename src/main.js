@@ -1,6 +1,7 @@
 import Vue from "vue";
 import * as netlifyIdentityWidget from "netlify-identity-widget";
 import GoTrue from "gotrue-js";
+import VueFirestore from "vue-firestore";
 
 import App from "./App.vue";
 import router from "./router";
@@ -17,6 +18,9 @@ export const auth = new GoTrue({
   APIUrl: configVars.VUE_APP_API_URL,
   setCookie: true,
 });
+
+// Initialize Vue Firestore
+Vue.use(VueFirestore);
 
 new Vue({
   router,
