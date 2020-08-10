@@ -23,7 +23,7 @@
               class="card-header"
               :class="{
                 'light-header': !isDarkMode,
-                'dark-header': isDarkMode,
+                'dark-header': isDarkMode
               }"
             />
             <h3 :class="{ 'light-text': isDarkMode, 'dark-text': !isDarkMode }">
@@ -49,7 +49,7 @@
               class="card-header"
               :class="{
                 'light-header': !isDarkMode,
-                'dark-header': isDarkMode,
+                'dark-header': isDarkMode
               }"
             />
             <h3 :class="{ 'light-text': isDarkMode, 'dark-text': !isDarkMode }">
@@ -75,7 +75,7 @@
               class="card-header"
               :class="{
                 'light-header': !isDarkMode,
-                'dark-header': isDarkMode,
+                'dark-header': isDarkMode
               }"
             />
             <h3 :class="{ 'light-text': isDarkMode, 'dark-text': !isDarkMode }">
@@ -101,7 +101,7 @@
               class="card-header"
               :class="{
                 'light-header': !isDarkMode,
-                'dark-header': isDarkMode,
+                'dark-header': isDarkMode
               }"
             />
             <h3 :class="{ 'light-text': isDarkMode, 'dark-text': !isDarkMode }">
@@ -127,7 +127,7 @@
               class="card-header"
               :class="{
                 'light-header': !isDarkMode,
-                'dark-header': isDarkMode,
+                'dark-header': isDarkMode
               }"
             />
             <h3 :class="{ 'light-text': isDarkMode, 'dark-text': !isDarkMode }">
@@ -151,11 +151,11 @@ export default {
   computed: {
     isDarkMode() {
       return this.$store.getters.isDarkMode;
-    },
+    }
   },
   components: {
-    Header,
-  },
+    Header
+  }
 };
 </script>
 

@@ -95,7 +95,7 @@ export default {
         })
         .catch(() => {
           this.signInText = "Sign In";
-          this.text = "Invalid logging details!";
+          this.text = "Invalid login details!";
           this.hasText = true;
         });
     }
