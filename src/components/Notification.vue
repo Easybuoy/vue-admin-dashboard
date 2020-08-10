@@ -44,7 +44,7 @@ export default {
 }
 
 .success {
-  background-color: $blue;
+  background-color: $success;
 }
 
 .danger {

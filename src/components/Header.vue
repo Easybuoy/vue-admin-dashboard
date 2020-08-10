@@ -1,7 +1,12 @@
 <template>
   <div id="nav" :class="{ 'nav-light': !isDarkMode, 'nav-dark': isDarkMode }">
     <div class="nav-1">
-      <img src="@/assets/logo.svg" alt="logo" />
+      <router-link
+        to="/"
+        :class="{ 'light-nav': !isDarkMode, 'dark-nav': isDarkMode }"
+      >
+        <img src="@/assets/logo.svg" alt="logo"
+      /></router-link>
       <router-link
         to="/"
         :class="{ 'light-nav': !isDarkMode, 'dark-nav': isDarkMode }"
@@ -37,18 +42,18 @@ export default {
           this.$router.push({
             name: "signin",
             params: {
-              userLoggedOut: true
-            }
+              userLoggedOut: true,
+            },
           });
         })
-        .catch(err => alert(err));
-    }
+        .catch((err) => alert(err));
+    },
   },
   computed: {
     isDarkMode() {
       return this.$store.getters.isDarkMode;
-    }
-  }
+    },
+  },
 };
 </script>
 
