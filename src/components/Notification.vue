@@ -18,11 +18,11 @@ export default {
   name: "Notification",
   props: {
     text: String,
-    success: Boolean,
+    success: Boolean
   },
   data() {
     return {
-      show: false,
+      show: false
     };
   },
   mounted() {
@@ -31,7 +31,7 @@ export default {
     setTimeout(() => {
       this.show = false;
     }, 3000);
-  },
+  }
 };
 </script>
 

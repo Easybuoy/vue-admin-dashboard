@@ -45,7 +45,7 @@ export default {
   computed: {
     isDarkMode() {
       return this.$store.getters.isDarkMode;
-    },
+    }
   },
   data() {
     return {
@@ -53,7 +53,7 @@ export default {
       hasText: false,
       text: "",
       requestAccountText: "Request Account",
-      isSuccess: false,
+      isSuccess: false
     };
   },
   mounted() {
@@ -76,21 +76,21 @@ export default {
       const data = {
         token: config.VUE_APP_SLACK_TOKEN,
         channel: "hq",
-        text: `${email} has requested admin access to Easybuoy HQ. Please go to Netlify to invite them`,
+        text: `${email} has requested admin access to Easybuoy HQ. Please go to Netlify to invite them`
       };
 
       slackURL.search = new URLSearchParams(data);
 
       fetch(slackURL)
-        .then((res) => res.json())
+        .then(res => res.json())
         .then(() => {
           this.requestAccountText = "Request Account";
           this.$router.push({
             name: "signin",
             params: {
               userRequestedAccount: true,
-              email,
-            },
+              email
+            }
           });
         })
         .catch(() => {
@@ -98,12 +98,12 @@ export default {
           this.text = `Error requesing account creation at this time`;
           this.requestAccountText = "Request Account";
         });
-    },
+    }
   },
   components: {
     ThemeSwitch,
-    Notification,
-  },
+    Notification
+  }
 };
 </script>
 

@@ -52,7 +52,7 @@ export default {
   computed: {
     isDarkMode() {
       return this.$store.getters.isDarkMode;
-    },
+    }
   },
   data() {
     return {
@@ -61,7 +61,7 @@ export default {
       hasText: false,
       text: "",
       signInText: "Sign In",
-      isSuccess: false,
+      isSuccess: false
     };
   },
   mounted() {
@@ -98,13 +98,13 @@ export default {
           this.text = "Invalid logging details!";
           this.hasText = true;
         });
-    },
+    }
   },
   components: {
     RequestAccount,
     ThemeSwitch,
-    Notification,
-  },
+    Notification
+  }
 };
 </script>
 

@@ -59,7 +59,7 @@ export default {
   name: "Home",
   components: {
     Header,
-    apexchart: VueApexCharts,
+    apexchart: VueApexCharts
   },
   data() {
     return {
@@ -67,33 +67,33 @@ export default {
         colors: ["#14f1d9", "#7b42f6"],
         legend: {
           labels: {
-            colors: [this.$store.getters.isDarkMode ? "white" : "black"],
+            colors: [this.$store.getters.isDarkMode ? "white" : "black"]
           },
-          position: "top",
+          position: "top"
         },
         tooltip: {
-          theme: "dark",
+          theme: "dark"
         },
         grid: {
           xaxis: {
             lines: {
-              show: true,
-            },
+              show: true
+            }
           },
           yaxis: {
             lines: {
-              show: false,
-            },
-          },
+              show: false
+            }
+          }
         },
         chart: {
-          id: "users",
+          id: "users"
         },
         xaxis: {
-          type: "datetime",
-        },
+          type: "datetime"
+        }
       },
-      series: [],
+      series: []
     };
   },
   firestore() {
@@ -101,19 +101,19 @@ export default {
       traffic: {
         ref: db.collection("traffic"),
         objects: true,
-        resolve: (traffic) => {
+        resolve: traffic => {
           const activeUsers = [];
           const newUsers = Object.values(traffic.newUsers);
 
           const todaysDate = new Date();
           const lastWeekDate = todaysDate.setDate(todaysDate.getDate() - 7);
-          Object.keys(traffic.activeUsers).map((key) => {
+          Object.keys(traffic.activeUsers).map(key => {
             if (new Date(traffic.activeUsers[key][0]) > lastWeekDate) {
               activeUsers.push(traffic.activeUsers[key]);
             }
           });
 
-          Object.keys(traffic.newUsers).map((key) => {
+          Object.keys(traffic.newUsers).map(key => {
             if (new Date(traffic.newUsers[key][0]) > lastWeekDate) {
               newUsers.push(traffic.newUsers[key]);
             }
@@ -122,24 +122,24 @@ export default {
           this.series = [
             {
               name: "active users",
-              data: activeUsers,
+              data: activeUsers
             },
             {
               name: "new users",
-              data: newUsers,
-            },
+              data: newUsers
+            }
           ];
         },
-        reject: (err) => {
+        reject: err => {
           console.log(err);
-        },
-      },
+        }
+      }
     };
   },
   computed: {
     isDarkMode() {
       return this.$store.getters.isDarkMode;
-    },
+    }
   },
   methods: {
     toggleDays() {
@@ -159,23 +159,23 @@ export default {
       const newUsers = [];
       // Binding docs
       this.$binding("activeUsers", db.collection("traffic").doc("activeUsers"))
-        .then((data) => {
+        .then(data => {
           console.log(data);
           const todaysDate = new Date();
           const lastWeekDate = todaysDate.setDate(todaysDate.getDate() - 7);
-          Object.keys(data).map((key) => {
+          Object.keys(data).map(key => {
             if (new Date(data[key][0]) > lastWeekDate) {
               activeUsers.push(data[key]);
             }
           });
         })
-        .catch((err) => console.log(err));
+        .catch(err => console.log(err));
 
       this.$binding("newUsers", db.collection("traffic").doc("newUsers"))
-        .then((data) => {
+        .then(data => {
           const todaysDate = new Date();
           const lastWeekDate = todaysDate.setDate(todaysDate.getDate() - 7);
-          Object.keys(data).map((key) => {
+          Object.keys(data).map(key => {
             if (new Date(data[key][0]) > lastWeekDate) {
               newUsers.push(data[key]);
             }
@@ -183,15 +183,15 @@ export default {
           this.series = [
             {
               name: "active users",
-              data: activeUsers,
+              data: activeUsers
             },
             {
               name: "new users",
-              data: newUsers,
-            },
+              data: newUsers
+            }
           ];
         })
-        .catch((err) => console.log(err));
+        .catch(err => console.log(err));
     },
     toggleWeeks() {
       this.$refs.weeks.style.color = "white";
@@ -210,22 +210,22 @@ export default {
       const newUsers = [];
       // Binding docs
       this.$binding("activeUsers", db.collection("traffic").doc("activeUsers"))
-        .then((data) => {
+        .then(data => {
           const todaysDate = new Date();
           const lastMonthsDate = todaysDate.setDate(todaysDate.getDate() - 30);
-          Object.keys(data).map((key) => {
+          Object.keys(data).map(key => {
             if (new Date(data[key][0]) > lastMonthsDate) {
               activeUsers.push(data[key]);
             }
           });
         })
-        .catch((err) => console.log(err));
+        .catch(err => console.log(err));
 
       this.$binding("newUsers", db.collection("traffic").doc("newUsers"))
-        .then((data) => {
+        .then(data => {
           const todaysDate = new Date();
           const lastMonthsDate = todaysDate.setDate(todaysDate.getDate() - 30);
-          Object.keys(data).map((key) => {
+          Object.keys(data).map(key => {
             if (new Date(data[key][0]) > lastMonthsDate) {
               newUsers.push(data[key]);
             }
@@ -233,15 +233,15 @@ export default {
           this.series = [
             {
               name: "active users",
-              data: activeUsers,
+              data: activeUsers
             },
             {
               name: "new users",
-              data: newUsers,
-            },
+              data: newUsers
+            }
           ];
         })
-        .catch((err) => console.log(err));
+        .catch(err => console.log(err));
     },
     toggleMonths() {
       this.$refs.months.style.color = "white";
@@ -260,22 +260,22 @@ export default {
       const newUsers = [];
       // Binding docs
       this.$binding("activeUsers", db.collection("traffic").doc("activeUsers"))
-        .then((data) => {
+        .then(data => {
           const todaysDate = new Date();
           const lastYearDate = todaysDate.setDate(todaysDate.getDate() - 365);
-          Object.keys(data).map((key) => {
+          Object.keys(data).map(key => {
             if (new Date(data[key][0]) > lastYearDate) {
               activeUsers.push(data[key]);
             }
           });
         })
-        .catch((err) => console.log(err));
+        .catch(err => console.log(err));
 
       this.$binding("newUsers", db.collection("traffic").doc("newUsers"))
-        .then((data) => {
+        .then(data => {
           const todaysDate = new Date();
           const lastYearDate = todaysDate.setDate(todaysDate.getDate() - 365);
-          Object.keys(data).map((key) => {
+          Object.keys(data).map(key => {
             if (new Date(data[key][0]) > lastYearDate) {
               newUsers.push(data[key]);
             }
@@ -283,17 +283,17 @@ export default {
           this.series = [
             {
               name: "active users",
-              data: activeUsers,
+              data: activeUsers
             },
             {
               name: "new users",
-              data: newUsers,
-            },
+              data: newUsers
+            }
           ];
         })
-        .catch((err) => console.log(err));
-    },
-  },
+        .catch(err => console.log(err));
+    }
+  }
 };
 </script>
 

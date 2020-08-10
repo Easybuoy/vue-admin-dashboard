@@ -47,7 +47,7 @@ export default {
   computed: {
     isDarkMode() {
       return this.$store.getters.isDarkMode;
-    },
+    }
   },
   data() {
     return {
@@ -55,7 +55,7 @@ export default {
       hasText: false,
       text: "",
       recoverText: "Send Email",
-      isSuccess: false,
+      isSuccess: false
     };
   },
   mounted() {
@@ -81,8 +81,8 @@ export default {
             name: "signin",
             params: {
               userRecoverdAccount: true,
-              email,
-            },
+              email
+            }
           });
         })
         .catch(() => {
@@ -90,13 +90,13 @@ export default {
           this.hasText = true;
           this.text = `Error sending recovery email!`;
         });
-    },
+    }
   },
   components: {
     RequestAccount,
     ThemeSwitch,
-    Notification,
-  },
+    Notification
+  }
 };
 </script>
 

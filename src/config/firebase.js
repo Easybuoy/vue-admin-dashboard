@@ -9,7 +9,7 @@ const firebaseApp = firebase.initializeApp({
   storageBucket: "vue-hq-8f020.appspot.com",
   messagingSenderId: "1006810439111",
   appId: "1:1006810439111:web:756402a329bec96ab34de2",
-  measurementId: "G-3VQYR593HP",
+  measurementId: "G-3VQYR593HP"
 });
 
 export const db = firebaseApp.firestore();
